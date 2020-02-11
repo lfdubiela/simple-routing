@@ -1,0 +1,10 @@
+{
+  "name":"Crud Pessoas",
+  "description":"Crud Pessoas Sem Nenhum Framework",
+  "require":{},
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}
