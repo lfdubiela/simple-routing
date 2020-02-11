@@ -4,5 +4,5 @@ Simple crud application with routing using no framework
 
 ## Authors
 
-* **lfdubiela** - *Initial work* - [PurpleBooth](https://github.com/lfdubiela)
+* **lfdubiela** - *Initial work* - (https://github.com/lfdubiela)
 
