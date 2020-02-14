@@ -3,6 +3,8 @@
 namespace App\Module\Pessoa\Controller;
 
 use App\Core\Request\IRequest;
+use App\Core\View\Render;
+use App\Module\Pessoa\View\Form\FormCadastro;
 
 class Pessoa {
 
@@ -13,6 +15,11 @@ class Pessoa {
 
     public static function cadastrar(IRequest $request)
     {
-        print "<h1> Cadastrar Pessoas </h1>";
+        $properties['form'] = new FormCadastro();
+        $properties['action'] = '/pessoas/cadastrar';
+
+        $render = new Render($properties, __DIR__.'/../View/form-cadastro.php');
+
+        echo $render->render();
     }
 }

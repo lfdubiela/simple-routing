@@ -18,8 +18,7 @@ class Router
      * Router constructor.
      */
     protected function __construct()
-    {
-    }
+    {}
 
     /**
      * Returns a singleton instance
@@ -93,13 +92,14 @@ class Router
     {
         $explodeDoublePoint = explode("::", $path);
 
-        if (count($explodeDoublePoint)) {
+
+        if (count($explodeDoublePoint) > 1) {
             return end($explodeDoublePoint);
         }
 
         $explodeSlash = explode("/", $path);
 
-        if (count($explodeSlash)) {
+        if (count($explodeSlash) > 1) {
             return end($explodeSlash);
         }
 
