@@ -85,8 +85,8 @@ class FieldBuilder
           $this->class = $arr['class'] ?? null;
           $this->placeHolder = $arr['placeHolder'] ?? null;
           $this->extraInfo = $arr['extraInfo'] ?? null;
-          $this->warningMessages = $arr['warningMessages'] ?? null;
-          $this->validators = $arr['validators'] ?? null;
+          $this->warningMessages = $arr['warningMessages'] ?? [];
+          $this->validators = $arr['validators'] ?? [];
 
           return $this->build();
     }

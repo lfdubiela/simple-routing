@@ -29,6 +29,13 @@ class FormCadastro
                     'validators' => [
                         'required'
                     ]
+                ],
+                [
+                    'name' => 'cadastrar',
+                    'description' => 'CADASTRAR',
+                    'id' => 'cadastrar',
+                    'value' => 'CADASTRAR',
+                    'type' => 'submit',
                 ]
             ]
 

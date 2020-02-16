@@ -14,6 +14,8 @@ interface IRequest
 
     public function getBody();
 
+    public function isPost(): bool;
+
     public function getMethod();
 
 }

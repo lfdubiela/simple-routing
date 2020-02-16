@@ -18,6 +18,10 @@ class Pessoa {
         $properties['form'] = new FormCadastro();
         $properties['action'] = '/pessoas/cadastrar';
 
+        if ($request->isPost()) {
+            var_dump($request->getBody());exit;
+        }
+
         $render = new Render($properties, __DIR__.'/../View/form-cadastro.php');
 
         echo $render->render();

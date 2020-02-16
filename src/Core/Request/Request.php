@@ -59,6 +59,11 @@ class Request implements IRequest
         return $this->method;
     }
 
+    public function isPost(): bool
+    {
+        return $this->getMethod() == Method::POST;
+    }
+
     protected function resolveUrl(): array
     {
         return parse_url($_SERVER['REQUEST_URI']);
