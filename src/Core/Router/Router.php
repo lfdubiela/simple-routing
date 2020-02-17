@@ -90,20 +90,19 @@ class Router
 
     protected function resolveAction($path)
     {
-        $explodeDoublePoint = explode("::", $path);
-
+        $explodeDoublePoint = array_filter(explode("::", $path));
 
         if (count($explodeDoublePoint) > 1) {
             return end($explodeDoublePoint);
         }
 
-        $explodeSlash = explode("/", $path);
+        $explodeSlash = array_filter(explode("/", $path));
 
         if (count($explodeSlash) > 1) {
             return end($explodeSlash);
         }
 
-        return "execute";
+        return "index";
     }
 
     protected function resolvePath($path)

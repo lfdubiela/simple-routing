@@ -36,7 +36,9 @@ class Request implements IRequest
 
     public function getPath()
     {
-        return trim($this->url['path'], "/") ?? null;
+        return strlen($this->url['path']) > 1
+            ? rtrim($this->url['path'], "/")
+            : $this->url['path'];
     }
 
     public function getHost()
@@ -66,7 +68,7 @@ class Request implements IRequest
 
     protected function resolveUrl(): array
     {
-        return parse_url($_SERVER['REQUEST_URI']);
+        return parse_url(preg_replace('#/+#','/',$_SERVER['REQUEST_URI']));
     }
 
     protected function resolveBody()

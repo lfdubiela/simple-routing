@@ -26,5 +26,7 @@ interface IField
 
     public function getWarningMessages();
 
+    public function getDefault();
+
     public function setValue($val);
 }

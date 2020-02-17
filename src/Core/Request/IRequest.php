@@ -17,5 +17,4 @@ interface IRequest
     public function isPost(): bool;
 
     public function getMethod();
-
 }

@@ -8,7 +8,7 @@ class Required implements IValidator
 {
     public function isValid($value): bool
     {
-        return empty($value);
+        return !empty($value);
     }
 
     public function getMessage(Field $field): string

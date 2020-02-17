@@ -19,6 +19,7 @@ class FieldBuilder
     protected $placeHolder;
     protected $extraInfo;
     protected $warningMessages;
+    protected $default;
     protected $validators;
 
     public function setDescription($description)
@@ -51,6 +52,11 @@ class FieldBuilder
         return $this;
     }
 
+    public function setDefault($default)
+    {
+        $this->default = $default;
+    }
+
     public function setClass($class)
     {
         $this->class = $class;
@@ -77,24 +83,25 @@ class FieldBuilder
 
     public function buildAssoc(array $arr)
     {
-          $this->description = $arr['description'] ?? null;
-          $this->type = $arr['type'] ?? null;
-          $this->value = $arr['value'] ?? null;
-          $this->id = $arr['id'] ?? null;
-          $this->name = $arr['name'] ?? null;
-          $this->class = $arr['class'] ?? null;
-          $this->placeHolder = $arr['placeHolder'] ?? null;
-          $this->extraInfo = $arr['extraInfo'] ?? null;
-          $this->warningMessages = $arr['warningMessages'] ?? [];
-          $this->validators = $arr['validators'] ?? [];
+        $this->description = $arr['description'] ?? null;
+        $this->default = $arr['default'] ?? null;
+        $this->type = $arr['type'] ?? null;
+        $this->value = $arr['value'] ?? null;
+        $this->id = $arr['id'] ?? $arr['name'];
+        $this->name = $arr['name'] ?? null;
+        $this->class = $arr['class'] ?? null;
+        $this->placeHolder = $arr['placeHolder'] ?? null;
+        $this->extraInfo = $arr['extraInfo'] ?? null;
+        $this->warningMessages = $arr['warningMessages'] ?? [];
+        $this->validators = $arr['validators'] ?? [];
 
-          return $this->build();
+        return $this->build();
     }
 
     public function build()
     {
         if (!$this->validateAfterBuild()) {
-            throw new \Exception("Falou ao criar field {$this->name}");
+            throw new \Exception("Erro ao criar field: {$this->name}");
         }
 
         return new Field(
@@ -107,6 +114,7 @@ class FieldBuilder
             $this->class,
             $this->placeHolder,
             $this->extraInfo,
+            $this->default,
             $this->warningMessages
         );
     }

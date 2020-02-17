@@ -7,7 +7,9 @@ use App\Core\View\Form\Field\FieldBuilder;
 
 class Form
 {
-    protected $name;
+    protected $action;
+
+    protected $method;
 
     protected $fields = [];
 
@@ -23,23 +25,31 @@ class Form
 
     const RADIO = 'radio';
 
+    const SELECT = 'select';
+
+    const BUTTON = 'button';
+
+    const SUBMIT = 'submit';
+
     /**
      * Form constructor.
-     * @param $name
+     * @param $action
+     * @param $method
      * @param array $fields
      */
-    public function __construct($name, array $fields)
+    public function __construct($action, $method, array $fields)
     {
-        $this->name = $name;
+        $this->action = $action;
+        $this->method = $method;
         $this->mapFields($fields);
     }
 
     /**
      * @return mixed
      */
-    public function getName()
+    public function getAction()
     {
-        return $this->name;
+        return $this->action;
     }
 
     public function isValid(): bool
@@ -62,6 +72,14 @@ class Form
     public function getFields(): array
     {
         return $this->fields;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMethod()
+    {
+        return $this->method;
     }
 
     private function mapFields(array $fields)

@@ -18,11 +18,22 @@ class Field implements IField
     protected $class;
     protected $placeHolder;
     protected $extraInfo;
+    protected $default;
     protected $warningMessages;
     protected $validators;
 
-    public function __construct($id, $name, $type, array $validators = [], $value = null, $description = null, $class = null, $placeHolder = null, $extraInfo = null, $warningMessage = [])
-    {
+    public function __construct(
+        $id,
+        $name,
+        $type, array $validators = [],
+        $value = null,
+        $description = null,
+        $class = null,
+        $placeHolder = null,
+        $extraInfo = null,
+        $default = null,
+        $warningMessage = []
+    ) {
         $this->description = $description;
         $this->type = $type;
         $this->value = $value;
@@ -31,6 +42,7 @@ class Field implements IField
         $this->class = $class;
         $this->placeHolder = $placeHolder;
         $this->extraInfo = $extraInfo;
+        $this->default = $default;
         $this->warningMessages = $warningMessage;
 
         $this->createValitors($validators);
@@ -44,6 +56,11 @@ class Field implements IField
 
             $this->validators[] = ValidatorFactory::create($name, $options);
         }
+    }
+
+    public function getDefault()
+    {
+        return $this->default;
     }
 
     /**
@@ -132,10 +149,12 @@ class Field implements IField
     public function validate()
     {
         /** @var IValidator $validator */
-        foreach ($this->validators as $validator) {
-            if (!$validator->isValid($this->value)) {
-                $this->warningMessages[] = $validator->getMessage($this);
-                return false;
+        if ($this->validators) {
+            foreach ($this->validators as $validator) {
+                if (!$validator->isValid($this->value)) {
+                    $this->warningMessages[] = $validator->getMessage($this);
+                    return false;
+                }
             }
         }
 
