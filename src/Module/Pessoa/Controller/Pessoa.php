@@ -6,6 +6,8 @@ use App\Core\Request\IRequest;
 use App\Core\View\Render;
 use App\Module\Pessoa\View\Form\FormCadastro;
 
+use App\Module\Pessoa\Service\Pessoa as Service;
+
 class Pessoa
 {
     public function listar(IRequest $request)
@@ -20,10 +22,16 @@ class Pessoa
         if ($request->isPost()) {
             $form->getForm()->hydrateValues($request->getBody());
             if ($form->getForm()->isValid()) {
+                $pessoa = $form->getPessoa();
+
+                $result = (new Service())->save($pessoa);
+
+                $props['message'] = $result ? "Salvo com sucesso" : "Ocorreu um erro ao salvar pessoa";
             }
         }
 
         $props['form'] = $form;
+
         $render = new Render($props, __DIR__ . '/../View/form-cadastro.php');
 
         echo $render->render();

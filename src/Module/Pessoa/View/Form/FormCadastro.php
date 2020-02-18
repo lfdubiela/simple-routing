@@ -4,6 +4,7 @@ namespace App\Module\Pessoa\View\Form;
 
 use App\Core\Request\Method;
 use App\Core\View\Form\Form;
+use App\Module\Pessoa\Model\Pessoa;
 
 class FormCadastro
 {
@@ -16,18 +17,25 @@ class FormCadastro
             Method::POST,
             [
                 [
+                    'name' => 'id',
+                    'type' => Form::HIDDEN,
+                ],
+                [
                     'name' => 'nivel',
-                    'description' => 'Nivel de Acesso:',
+                    'description' => 'Nivel de Acesso',
                     'type' => Form::SELECT,
-                    'default' => 2,
-                    'value' => [
-                        1 => 'Usuário',
-                        2 => 'Administrador'
+                    'value' => 'Usuario',
+                    'options' => [
+                        'Usuário' => 'Usuario',
+                        'Cadastro Simples' => 'Simples'
+                    ],
+                    'validators' => [
+                        'required'
                     ]
                 ],
                 [
                     'name' => 'nome',
-                    'description' => 'Nome*:',
+                    'description' => 'Nome*',
                     'id' => 'nome',
                     'type' => Form::TEXT,
                     'validators' => [
@@ -36,7 +44,7 @@ class FormCadastro
                 ],
                 [
                     'name' => 'email',
-                    'description' => 'E-mail:',
+                    'description' => 'E-mail',
                     'id' => 'email',
                     'type' => Form::EMAIL,
                     'validators' => [
@@ -51,101 +59,112 @@ class FormCadastro
                 ],
                 [
                     'name' => 'matricula',
-                    'description' => 'Matricula:',
+                    'description' => 'Matricula',
                     'type' => Form::TEXT,
+                    'validators' => [
+                        'required'
+                    ]
                 ],
                 [
                     'name' => 'admissao_data',
-                    'description' => 'Data de Admissão:',
+                    'description' => 'Data de Admissão',
                     'type' => Form::DATE,
+                    'validators' => [
+                        'required'
+                    ]
                 ],
                 [
                     'name' => 'exige_qualificacao',
-                    'description' => 'Exige Qualificação:',
+                    'description' => 'Exige Qualificação',
                     'type' => Form::RADIO,
-                    'value' => [
-                        'Sim' => 'Sim',
-                        'Não' => 'Não'
+                    'value' => 1,
+                    'options' => [
+                        'Sim' => 1,
+                        'Não' => 0
                     ]
                 ],
                 [
                     'name' => 'unidade',
-                    'description' => 'Unidade:',
+                    'description' => 'Unidade',
                     'type' => Form::SELECT,
-                    'value' => [
-                        1 => 'Matriz',
-                        2 => 'Sede 02'
+                    'options' => [
+                        'Matriz' => 1,
+                        'Sede 02' => 2,
                     ]
                 ],
                 [
                     'name' => 'cargo',
-                    'description' => 'Cargo Principal:',
+                    'description' => 'Cargo Principal',
                     'type' => Form::SELECT,
-                    'value' => [
-                        1 => 'Chefe',
-                        2 => 'Funcionário'
+                    'options' => [
+                        'Chefe' => 1,
+                        'Funcionário' => 2
+                    ],
+                    'validators' => [
+                        'required'
                     ]
                 ],
                 [
                     'name' => 'cargo_1',
-                    'description' => 'Cargo Principal:',
+                    'description' => 'Cargo Principal',
                     'type' => Form::SELECT,
-                    'value' => [
-                        1 => 'Chefe',
-                        2 => 'Funcionário'
+                    'options' => [
+                        'Chefe' => 1,
+                        'Funcionário' => 2
                     ]
                 ],
                 [
                     'name' => 'cargo_2',
-                    'description' => 'Cargo Secundario:',
+                    'description' => 'Cargo Secundario',
                     'type' => Form::SELECT,
-                    'value' => [
-                        1 => 'Chefe',
-                        2 => 'Funcionário'
+                    'options' => [
+                        'Chefe' => 1,
+                        'Funcionário' => 2
                     ]
                 ],
                 [
                     'name' => 'setor',
-                    'description' => 'Setor:',
+                    'description' => 'Setor',
                     'type' => Form::SELECT,
-                    'value' => [
-                        1 => 'Administrativo',
-                        2 => 'Chão de fábrica'
+                    'options' => [
+                        'Administrativo' => 1,
+                        'Chão de fabrica' => 2
                     ]
                 ],
                 [
                     'name' => 'turno',
-                    'description' => 'Turno:',
+                    'description' => 'Turno',
                     'type' => Form::SELECT,
-                    'value' => [
-                        1 => 'Noturno',
-                        2 => 'Diurno'
+                    'options' => [
+                        'Noturno' => 1,
+                        'Diurno' => 2
                     ]
                 ],
                 [
                     'name' => 'carga_horaria',
-                    'description' => 'Carga Horária:',
+                    'description' => 'Carga Horária',
                     'type' => Form::NUMBER,
                 ],
                 [
                     'name' => 'login',
-                    'description' => 'Login:',
+                    'description' => 'Login',
                     'type' => Form::TEXT,
                 ],
                 [
                     'name' => 'senha',
-                    'description' => 'Senha:',
+                    'description' => 'Senha',
                     'type' => Form::TEXT,
                 ],
                 [
                     'name' => 'confirmar_senha',
-                    'description' => 'Confirmar Senhar*:',
+                    'description' => 'Confirmar Senhar*',
                     'type' => Form::TEXT,
                 ],
                 [
                     'name' => 'senha_expiracao',
-                    'description' => 'Expiração Senha em*:',
+                    'description' => 'Expiração Senha em*',
                     'type' => Form::NUMBER,
+                    'value' => 180,
                     'extraInfo' => 'dias (após vencimento do periodo, a senha expira a sua alteração é obrigatoria)'
                 ],
                 [
@@ -163,5 +182,18 @@ class FormCadastro
     public function getForm(): Form
     {
         return $this->form;
+    }
+
+    public function getPessoa(): Pessoa
+    {
+        return new Pessoa(
+            $this->form->getFieldValue('id'),
+            $this->form->getFieldValue('nivel'),
+            $this->form->getFieldValue('nome'),
+            $this->form->getFieldValue('email'),
+            $this->form->getFieldValue('matricula'),
+            $this->form->getFieldValue('cargo'),
+            $this->form->getFieldValue('admissao_data')
+        );
     }
 }

@@ -45,77 +45,89 @@ $form = $this->form->getForm();
                     <div class="tab-pane fade show active" id="dados-principais" role="tabpanel"
                          aria-labelledby="home-tab">
                         <div class="margin-em">
+
+
                             <form class="" action="<?= $form->getAction() ?>"
                                   method="<?= $form->getMethod() ?>">
                                 <?php
                                 /** @var \App\Core\View\Form\Field\Field $field */
                                 foreach ($form->getFields() as $field) { ?>
-                                    <div class="form-group row">
-                                            <?php if (in_array($field->getType(), ['select', 'radio'])) { ?>
-                                            <label class="col-sm-3 col-form-label col-form-label-sm"
-                                                   for="<?= $field->getName() ?>"><?= $field->getDescription() ?> </label>
+                                <div class="form-group row">
+                                    <?php if (in_array($field->getType(), ['select', 'radio'])) { ?>
+                                        <label class="col-sm-3 col-form-label col-form-label-sm"
+                                               for="<?= $field->getName() ?>"><?= $field->getDescription() ?>: </label>
+                                        <div class="col-sm-9">
+                                            <?php if ($field->getType() == \App\Core\View\Form\Form::SELECT) { ?>
+                                                <select class="form-control form-control-sm"
+                                                        id="<?= $field->getId() ?>"
+                                                        name=<?= $field->getName() ?> type="<?= $field->getType() ?>">
+                                                    <?php if (!$field->getOptions()) { ?>
+                                                        <option><?= $field->getExtraInfo() ?></option>
+                                                    <?php } ?>
+                                                    <?php foreach ($field->getOptions() as $key => $val) { ?>
+                                                        <option <?= $field->getOptions() == $key ? 'selected' : null ?>
+                                                                value="<?= $val ?>"> <?= $key ?> </option>
+                                                    <?php } ?>
+                                                </select>
+                                            <?php } else { ?>
+                                                <?php foreach ($field->getOptions() as $key => $val) { ?>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="<?= $field->getType() ?>"
+                                                               name=<?= $field->getName() ?> value="<?= $val ?>" <?= $field->isSelected($val) ? 'checked' : '' ?> >
+                                                        <label class="form-check-label"><?= $key ?></label>
+                                                    </div>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </div>
+                                    <?php }
+
+
+                                    else if ($field->getType() == \App\Core\View\Form\Form::CHECKBOX) { ?>
+                                        <div class="col-sm-3 col-form-label col-form-label-sm"></div>
+                                        <div class="col-sm-9">
+                                            <input name="<?= $field->getName() ?>" type="checkbox">
+                                            <label for="<?= $field->getName() ?>"><?= $field->getDescription() ?></label>
+                                        </div>
+                                    <?php }
+
+                                    else if ($field->getType() == \App\Core\View\Form\Form::SUBMIT) { ?>
+                                    <div class="col-sm-3 col-form-label col-form-label-sm"></div>
+                                    <div class="col-sm-9">
+                                        <button type="<?= $field->getType() ?>"
+                                                class="btn btn-primary"><?= $field->getName() ?></button>
+                                        <?php } else { ?>
+                                            <?php if ($field->getType() != \App\Core\View\Form\Form::HIDDEN) { ?>
+                                                <label class="col-sm-3 col-form-label col-form-label-sm" for="<?= $field->getName() ?>"><?= $field->getDescription() ?>: </label>
+                                            <?php } ?>
                                             <div class="col-sm-9">
-                                                <?php if ($field->getType() == \App\Core\View\Form\Form::SELECT) { ?>
-                                                    <select class="form-control form-control-sm"
-                                                            id="<?= $field->getId() ?>"
-                                                            name=<?= $field->getName() ?> type="<?= $field->getType() ?>">
-                                                        <?php if (!$field->getDefault()) { ?>
-                                                            <option><?= $field->getExtraInfo() ?></option>
-                                                        <?php } ?>
-                                                        <?php foreach ($field->getValue() as $key => $val) { ?>
-                                                            <option <?= $field->getDefault() == $key ? 'selected' : null ?>
-                                                                    value="<?= $key ?>"> <?= $val ?> </option>
-                                                        <?php } ?>
-                                                    </select>
-                                                <?php } ?>
-                                                <?php if ($field->getExtraInfo()) { ?>
-                                                    <small id="emailHelp"
-                                                           class="form-text text-muted"><?= $field->getExtraInfo() ?></small>
-                                                <?php } ?>
-                                                <?php if ($field->getWarningMessages()) { ?>
-                                                    <?php foreach ($field->getWarningMessages() as $message) { ?>
+                                                <input class="form-control form-control-sm <?= !$field->isValid() ? 'is-invalid' : '' ?>"
+                                                       id="<?= $field->getId() ?>"
+                                                       name=<?= $field->getName() ?> type="<?= $field->getType() ?>"
+                                                       value="<?= $field->getValue() ?>">
+
+                                                <?php if ($field->getWarningMessages()) {
+                                                    foreach ($field->getWarningMessages() as $message) { ?>
                                                         <div class="invalid-feedback">
                                                             <?= $message ?>
                                                         </div>
-                                                    <?php } ?>
-                                                <?php } ?>
-                                            <?php } else { ?>
-
-                                                <?php if ($field->getType() == \App\Core\View\Form\Form::SUBMIT) { ?>
-                                                <div class="col-sm-3 col-form-label col-form-label-sm"></div>
-                                                <div class="col-sm-9">
-                                                    <button type="<?= $field->getType() ?>"
-                                                            class="btn btn-primary"><?= $field->getName() ?></button>
-                                                <?php } else { ?>
-                                                <label class="col-sm-3 col-form-label col-form-label-sm"
-                                                       for="<?= $field->getName() ?>"><?= $field->getDescription() ?> </label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control form-control-sm"
-                                                           id="<?= $field->getId() ?>"
-                                                           name=<?= $field->getName() ?> type="<?= $field->getType() ?>"
-                                                           value="<?= $field->getValue() ?>">
-                                                    <?php if ($field->getExtraInfo()) { ?>
-                                                        <small id="emailHelp"
-                                                               class="form-text text-muted"><?= $field->getExtraInfo() ?></small>
-                                                    <?php } ?>
-                                                    <?php if ($field->getWarningMessages()) { ?>
-                                                        <?php foreach ($field->getWarningMessages() as $message) { ?>
-                                                            <div class="invalid-feedback">
-                                                                <?= $message ?>
-                                                            </div>
-                                                        <?php }
-                                                    }
+                                                    <?php }
                                                 }
-                                            } ?>
-                                        </div>
+
+                                                if ($field->getExtraInfo()) { ?>
+                                                    <small id="emailHelp"
+                                                           class="form-text text-muted"><?= $field->getExtraInfo() ?></small>
+                                                <?php } ?>
+                                            </div>
+                                        <?php } ?>
                                     </div>
-                                <?php } ?>
+                                    <?php
+                                    } ?>
                             </form>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="dados-outros" role="tabpanel" aria-labelledby="home-tab">Outros...
-                    </div>
                 </div>
+            <div class="tab-pane fade" id="dados-outros" role="tabpanel" aria-labelledby="home-tab">Outros...
+            </div>
             </div>
         </div>
     </div>
@@ -126,6 +138,10 @@ $form = $this->form->getForm();
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <style>
+    form label.col-form-label {
+        text-align: right;
+    }
+
     .margin-em {
         margin: 1em;
     }

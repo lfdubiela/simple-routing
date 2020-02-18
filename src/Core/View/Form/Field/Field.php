@@ -18,7 +18,7 @@ class Field implements IField
     protected $class;
     protected $placeHolder;
     protected $extraInfo;
-    protected $default;
+    protected $options;
     protected $warningMessages;
     protected $validators;
 
@@ -31,7 +31,7 @@ class Field implements IField
         $class = null,
         $placeHolder = null,
         $extraInfo = null,
-        $default = null,
+        $options = [],
         $warningMessage = []
     ) {
         $this->description = $description;
@@ -42,7 +42,7 @@ class Field implements IField
         $this->class = $class;
         $this->placeHolder = $placeHolder;
         $this->extraInfo = $extraInfo;
-        $this->default = $default;
+        $this->options = $options;
         $this->warningMessages = $warningMessage;
 
         $this->createValitors($validators);
@@ -58,9 +58,9 @@ class Field implements IField
         }
     }
 
-    public function getDefault()
+    public function getOptions()
     {
-        return $this->default;
+        return $this->options;
     }
 
     /**
@@ -161,8 +161,23 @@ class Field implements IField
         return true;
     }
 
+    public function isSelected($val) {
+        return $this->value == $val;
+    }
+
+    public function isValid(): bool
+    {
+        return count($this->warningMessages) == 0;
+    }
+
     public function setValue($value)
     {
         $this->value = $value;
     }
+
+    public function setOptions($options)
+    {
+        $this->options = $options;
+    }
+
 }

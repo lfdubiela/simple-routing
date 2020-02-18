@@ -5,7 +5,6 @@ namespace App\Core\View\Form\Field;
 
 
 use App\Core\View\Form\Validation\IValidator;
-use http\Exception;
 
 class FieldBuilder
 {
@@ -19,7 +18,7 @@ class FieldBuilder
     protected $placeHolder;
     protected $extraInfo;
     protected $warningMessages;
-    protected $default;
+    protected $options;
     protected $validators;
 
     public function setDescription($description)
@@ -52,11 +51,6 @@ class FieldBuilder
         return $this;
     }
 
-    public function setDefault($default)
-    {
-        $this->default = $default;
-    }
-
     public function setClass($class)
     {
         $this->class = $class;
@@ -84,9 +78,9 @@ class FieldBuilder
     public function buildAssoc(array $arr)
     {
         $this->description = $arr['description'] ?? null;
-        $this->default = $arr['default'] ?? null;
         $this->type = $arr['type'] ?? null;
         $this->value = $arr['value'] ?? null;
+        $this->options = $arr['options'] ?? [];
         $this->id = $arr['id'] ?? $arr['name'];
         $this->name = $arr['name'] ?? null;
         $this->class = $arr['class'] ?? null;
@@ -114,7 +108,7 @@ class FieldBuilder
             $this->class,
             $this->placeHolder,
             $this->extraInfo,
-            $this->default,
+            $this->options,
             $this->warningMessages
         );
     }

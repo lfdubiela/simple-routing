@@ -13,6 +13,8 @@ class Form
 
     protected $fields = [];
 
+    const HIDDEN = 'hidden';
+
     const TEXT = 'text';
 
     const EMAIL = 'email';
@@ -89,6 +91,17 @@ class Form
             $fieldInstance = (new FieldBuilder())->buildAssoc($field);
             $this->fields[$field['name']] = $fieldInstance;
         }
+    }
+
+    public function getFieldValue($fieldName)
+    {
+        if ($this->fields[$fieldName]) {
+            /** @var Field $field */
+           $field = $this->fields[$fieldName];
+           return $field->getValue();
+        }
+
+        return '';
     }
 
     public function hydrateValues(array $values)

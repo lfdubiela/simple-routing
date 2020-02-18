@@ -13,6 +13,7 @@ class Required implements IValidator
 
     public function getMessage(Field $field): string
     {
-        return "Campo {$field->getName()} requerido";
+        $description = $field->getDescription() ? $field->getDescription() : $field->getName();
+        return "Campo '{$description}' requerido";
     }
 }

@@ -6,7 +6,7 @@ use App\Core\View\Form\Field\Field;
 
 class Integer implements IValidator
 {
-    public function validate($value): bool
+    public function isValid($value): bool
     {
         return is_integer($value);
     }
