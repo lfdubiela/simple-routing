@@ -51,45 +51,18 @@ class FormCadastro
                         'required'
                     ]
                 ],
-                [
-                    'name' => 'bloquear_envio_email',
-                    'description' => 'Bloquear envio de e-mail para esta pessoa.',
-                    'id' => 'bloquear_envio_email',
-                    'type' => Form::CHECKBOX,
-                ],
+//                [
+//                    'name' => 'bloquear_envio_email',
+//                    'description' => 'Bloquear envio de e-mail para esta pessoa.',
+//                    'id' => 'bloquear_envio_email',
+//                    'type' => Form::CHECKBOX,
+//                ],
                 [
                     'name' => 'matricula',
                     'description' => 'Matricula',
                     'type' => Form::TEXT,
                     'validators' => [
                         'required'
-                    ]
-                ],
-                [
-                    'name' => 'admissao_data',
-                    'description' => 'Data de Admissão',
-                    'type' => Form::DATE,
-                    'validators' => [
-                        'required'
-                    ]
-                ],
-                [
-                    'name' => 'exige_qualificacao',
-                    'description' => 'Exige Qualificação',
-                    'type' => Form::RADIO,
-                    'value' => 1,
-                    'options' => [
-                        'Sim' => 1,
-                        'Não' => 0
-                    ]
-                ],
-                [
-                    'name' => 'unidade',
-                    'description' => 'Unidade',
-                    'type' => Form::SELECT,
-                    'options' => [
-                        'Matriz' => 1,
-                        'Sede 02' => 2,
                     ]
                 ],
                 [
@@ -105,68 +78,95 @@ class FormCadastro
                     ]
                 ],
                 [
-                    'name' => 'cargo_1',
-                    'description' => 'Cargo Principal',
-                    'type' => Form::SELECT,
-                    'options' => [
-                        'Chefe' => 1,
-                        'Funcionário' => 2
+                    'name' => 'admissao_data',
+                    'description' => 'Data de Admissão',
+                    'type' => Form::DATE,
+                    'validators' => [
+                        'required'
                     ]
                 ],
-                [
-                    'name' => 'cargo_2',
-                    'description' => 'Cargo Secundario',
-                    'type' => Form::SELECT,
-                    'options' => [
-                        'Chefe' => 1,
-                        'Funcionário' => 2
-                    ]
-                ],
-                [
-                    'name' => 'setor',
-                    'description' => 'Setor',
-                    'type' => Form::SELECT,
-                    'options' => [
-                        'Administrativo' => 1,
-                        'Chão de fabrica' => 2
-                    ]
-                ],
-                [
-                    'name' => 'turno',
-                    'description' => 'Turno',
-                    'type' => Form::SELECT,
-                    'options' => [
-                        'Noturno' => 1,
-                        'Diurno' => 2
-                    ]
-                ],
-                [
-                    'name' => 'carga_horaria',
-                    'description' => 'Carga Horária',
-                    'type' => Form::NUMBER,
-                ],
-                [
-                    'name' => 'login',
-                    'description' => 'Login',
-                    'type' => Form::TEXT,
-                ],
-                [
-                    'name' => 'senha',
-                    'description' => 'Senha',
-                    'type' => Form::TEXT,
-                ],
-                [
-                    'name' => 'confirmar_senha',
-                    'description' => 'Confirmar Senhar*',
-                    'type' => Form::TEXT,
-                ],
-                [
-                    'name' => 'senha_expiracao',
-                    'description' => 'Expiração Senha em*',
-                    'type' => Form::NUMBER,
-                    'value' => 180,
-                    'extraInfo' => 'dias (após vencimento do periodo, a senha expira a sua alteração é obrigatoria)'
-                ],
+//                [
+//                    'name' => 'exige_qualificacao',
+//                    'description' => 'Exige Qualificação',
+//                    'type' => Form::RADIO,
+//                    'value' => 1,
+//                    'options' => [
+//                        'Sim' => 1,
+//                        'Não' => 0
+//                    ]
+//                ],
+//                [
+//                    'name' => 'unidade',
+//                    'description' => 'Unidade',
+//                    'type' => Form::SELECT,
+//                    'options' => [
+//                        'Matriz' => 1,
+//                        'Sede 02' => 2,
+//                    ]
+//                ],
+//                [
+//                    'name' => 'cargo_1',
+//                    'description' => 'Cargo Principal',
+//                    'type' => Form::SELECT,
+//                    'options' => [
+//                        'Chefe' => 1,
+//                        'Funcionário' => 2
+//                    ]
+//                ],
+//                [
+//                    'name' => 'cargo_2',
+//                    'description' => 'Cargo Secundario',
+//                    'type' => Form::SELECT,
+//                    'options' => [
+//                        'Chefe' => 1,
+//                        'Funcionário' => 2
+//                    ]
+//                ],
+//                [
+//                    'name' => 'setor',
+//                    'description' => 'Setor',
+//                    'type' => Form::SELECT,
+//                    'options' => [
+//                        'Administrativo' => 1,
+//                        'Chão de fabrica' => 2
+//                    ]
+//                ],
+//                [
+//                    'name' => 'turno',
+//                    'description' => 'Turno',
+//                    'type' => Form::SELECT,
+//                    'options' => [
+//                        'Noturno' => 1,
+//                        'Diurno' => 2
+//                    ]
+//                ],
+//                [
+//                    'name' => 'carga_horaria',
+//                    'description' => 'Carga Horária',
+//                    'type' => Form::NUMBER,
+//                ],
+//                [
+//                    'name' => 'login',
+//                    'description' => 'Login',
+//                    'type' => Form::TEXT,
+//                ],
+//                [
+//                    'name' => 'senha',
+//                    'description' => 'Senha',
+//                    'type' => Form::TEXT,
+//                ],
+//                [
+//                    'name' => 'confirmar_senha',
+//                    'description' => 'Confirmar Senhar*',
+//                    'type' => Form::TEXT,
+//                ],
+//                [
+//                    'name' => 'senha_expiracao',
+//                    'description' => 'Expiração Senha em*',
+//                    'type' => Form::NUMBER,
+//                    'value' => 180,
+//                    'extraInfo' => 'dias (após vencimento do periodo, a senha expira a sua alteração é obrigatoria)'
+//                ],
                 [
                     'name' => 'cadastrar',
                     'description' => 'cadastrar',

@@ -18,7 +18,6 @@ class Render
 
     public function render()
     {
-        ob_start();
         if (file_exists($this->path)) {
             foreach ($this->properties as $name => $property) {
                 $this->$name = $property;
@@ -26,7 +25,6 @@ class Render
 
             ob_start();
 
-            //Includes contents
             include $this->path;
             $buffer = ob_get_contents();
             @ob_end_clean();

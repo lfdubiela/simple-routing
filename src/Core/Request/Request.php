@@ -27,7 +27,7 @@ class Request implements IRequest
 
     public function getUrlParameter($index = null)
     {
-        if (!$index && empty($_GET[$index])) {
+        if ($index && !empty($_GET[$index])) {
              return $_GET[$index];
         }
 

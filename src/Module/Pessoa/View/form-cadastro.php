@@ -26,6 +26,12 @@ $form = $this->form->getForm();
         <div class="margin-em">
             <div class="tab-pane fade show active" id="cadastrar-pessoas" role="tabpanel" aria-labelledby="home-tab">
 
+                <?php if ($this->alert) { ?>
+                    <div class="alert <?= $this->alert['error'] ? "alert-error" : "alert-success"?>" role="alert">
+                        <?= $this->alert['message']?>
+                    </div>
+                <?php } ?>
+
                 <div class="alert alert-secondary" role="alert">
                     <strong>*</strong> Campos Obrigatórios
                 </div>

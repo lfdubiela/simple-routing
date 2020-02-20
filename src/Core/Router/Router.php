@@ -49,6 +49,21 @@ class Router
         return $this;
     }
 
+    public function delete($path, $controller): Router
+    {
+        $action = $this->resolveAction($path);
+
+        $path = $this->resolvePath($path);
+
+        $this->handlers[$path][Method::DELETE] =
+            [
+                'action' => $action,
+                'controller' => $controller
+            ];
+
+        return $this;
+    }
+
     public function post($path, $controller): Router
     {
         $action = $this->resolveAction($path);

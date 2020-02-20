@@ -110,8 +110,10 @@ class Form
          * @var  Field $field
          */
         foreach ($values as $fieldName => $value) {
-            $field = $this->fields[$fieldName];
-            $field->setValue($value);
+            if (isset($this->fields[$fieldName])) {
+                $field = $this->fields[$fieldName];
+                $field->setValue($value);
+            }
         }
     }
 

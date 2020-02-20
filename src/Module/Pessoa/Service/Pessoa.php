@@ -25,4 +25,27 @@ class Pessoa
 
         return $this->repository->insert($pessoa);
     }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    public function find(int $id)
+    {
+        return $this->repository->find($id);
+    }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    public function search(array $params)
+    {
+        return $this->repository->search($params);
+    }
+
+    public function excluir(int $id)
+    {
+        return $this->repository->excluir($id);
+    }
 }

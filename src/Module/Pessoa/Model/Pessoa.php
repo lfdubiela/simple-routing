@@ -94,4 +94,9 @@ class Pessoa
     {
         return $this->dataAdmissao;
     }
+
+    public function toArray()
+    {
+
+    }
 }
